@@ -78,9 +78,9 @@ def tree(obj, name='root', **kwargs):
                 _kwargs['padding_extra'] = _kwargs['symbol_last_child_birth']
                 _kwargs['padding_increment'] = _kwargs['symbol_last_child_alive']
             if _kwargs['return_instead']:
-                result += show_content(item, item_name, **_kwargs)
+                result += tree(item, item_name, **_kwargs)
             else:
-                show_content(item, item_name, **_kwargs)
+                tree(item, item_name, **_kwargs)
     else:
         neck = u': ' if name else u''
         if _kwargs['return_instead']:
@@ -106,9 +106,9 @@ def tree(obj, name='root', **kwargs):
                 else:
                     item_name = ""
                 if _kwargs['return_instead']:
-                    result += show_content(item, item_name, **_kwargs)
+                    result += tree(item, item_name, **_kwargs)
                 else:
-                    show_content(item, item_name, **_kwargs)
+                    tree(item, item_name, **_kwargs)
                 if i < len(obj) - 1:
                     sep = ', '
                 else:
