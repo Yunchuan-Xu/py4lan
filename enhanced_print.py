@@ -37,6 +37,7 @@ def tree(obj, name='root', **kwargs):
                'no_expand_types': {},
                'expand': True,
                'return_instead': False,
+               'show_type': False,
                'padding_base': '',
                'padding_extra': '',
                'padding_increment': '',
@@ -52,17 +53,13 @@ def tree(obj, name='root', **kwargs):
         if not _kwargs['expand']:
             at_top_level_of_non_expand_line = True
     result = u''
-    head = u'{}{}{}'.format(_kwargs['padding_base'], _kwargs['padding_extra'], name)
-    if _kwargs['return_instead']:
-        result += head
-    else:
-        six.print_(head, end='')
     if _kwargs['expand']:
-        neck = u'\n'
+        obj_type = ' ' + repr(type(obj)) if _kwargs['show_type'] else ''
+        head = u'{}{}{}{}\n'.format(_kwargs['padding_base'], _kwargs['padding_extra'], name, obj_type)
         if _kwargs['return_instead']:
-            result += neck
+            result += head
         else:
-            six.print_(neck, end='')
+            six.print_(head, end='')
         _kwargs['padding_base'] = _kwargs['padding_base'] + _kwargs['padding_increment']
         for i, item in enumerate(obj):
             if isinstance(obj, dict):
@@ -82,11 +79,11 @@ def tree(obj, name='root', **kwargs):
             else:
                 tree(item, item_name, **_kwargs)
     else:
-        neck = u': ' if name else u''
+        head = u'{}{}{}{}'.format(_kwargs['padding_base'], _kwargs['padding_extra'], name, ': ' if name else '')
         if _kwargs['return_instead']:
-            result += neck
+            result += head
         else:
-            six.print_(neck, end='')
+            six.print_(head, end='')
         if hasattr(obj, '__iter__') and not isinstance(obj, STRING_TYPE):
             body_start = u'{' if isinstance(obj, (dict, set)) \
                 else u'[' if isinstance(obj, list) \
