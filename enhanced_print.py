@@ -15,17 +15,17 @@ def tree(obj, name='root', **kwargs):
     """
     print out an object as a tree
 
-    :param obj: the object
-    :param name: the name of the object
-    :param kwargs:
-        symbol_child_birth=" ├─ ",
-        symbol_child_alive=" │  " ,
-        symbol_last_child_birth=" └─ ",
-        symbol_last_child_alive="    ",
-        expand_types={},
-        no_expand_types={},
-        expand=True,
-        return_instead=False
+    :param obj: the object to be printed
+    :param name: the name of the object, default='root'
+    :param symbol_child_birth: the tree symbol where a sub-item is showing its first line, default=" ├─ "
+    :param symbol_child_alive: the tree symbol where a sub-item is showing its rest lines, default=" │  "
+    :param symbol_last_child_birth: the tree symbol where the last sub-item is showing its first line, default=" └─ "
+    :param symbol_last_child_alive: the tree symbol where the last sub-item is showing its rest lines, default="    "
+    :param expand_types: if not empty, only expand_types objects will be expanded, default={}
+    :param no_expand_types: all iterable objects will be expanded except no_expand_types objects, only works when expand_types is empty, default={}
+    :param expand: if False, print out the object in one line, default=True
+    :param return_instead: if True, no printing, but return a string instead, default=False
+    :param show_type: if True, object type info will be added at the end of expanding object name, default=False
     :return:
         unicode (in PY2) or str (in PY3) or None (return_instead=False)
     """
