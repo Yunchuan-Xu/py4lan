@@ -6,9 +6,6 @@ import six
 if six.PY2:
     reload(sys)
     sys.setdefaultencoding('utf-8')
-    STRING_TYPE = (str, unicode)
-else:
-    STRING_TYPE = str
 
 
 def tree(obj, name='root', **kwargs):
@@ -45,7 +42,7 @@ def tree(obj, name='root', **kwargs):
     _kwargs.update(kwargs)
     at_top_level_of_non_expand_line = False
     if _kwargs['expand']:
-        _kwargs['expand'] = hasattr(obj, '__iter__') and not isinstance(obj, STRING_TYPE)
+        _kwargs['expand'] = hasattr(obj, '__iter__') and not isinstance(obj, six.string_types)
         if _kwargs['expand_types']:
             _kwargs['expand'] = _kwargs['expand'] and isinstance(obj, tuple(_kwargs['expand_types']))
         elif _kwargs['no_expand_types']:
@@ -84,7 +81,7 @@ def tree(obj, name='root', **kwargs):
             result += head
         else:
             six.print_(head, end='')
-        if hasattr(obj, '__iter__') and not isinstance(obj, STRING_TYPE):
+        if hasattr(obj, '__iter__') and not isinstance(obj, six.string_types):
             body_start = u'{' if isinstance(obj, (dict, set)) \
                 else u'[' if isinstance(obj, list) \
                 else u'(' if isinstance(obj, tuple) \
@@ -124,7 +121,7 @@ def tree(obj, name='root', **kwargs):
             else:
                 six.print_(body_end, end='')
         else:
-            body = (obj if isinstance(obj, STRING_TYPE) else repr(obj)) + _kwargs['padding_end']
+            body = (obj if isinstance(obj, six.string_types) else repr(obj)) + _kwargs['padding_end']
             if _kwargs['return_instead']:
                 result += body
             else:
