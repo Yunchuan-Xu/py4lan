@@ -4,8 +4,10 @@ import six
 
 
 if six.PY2:
+    stdout = sys.stdout
     reload(sys)
     sys.setdefaultencoding('utf-8')
+    sys.stdout = stdout
 
 
 def tree(obj, name='root', **kwargs):
@@ -14,10 +16,10 @@ def tree(obj, name='root', **kwargs):
 
     :param obj: the object to be printed
     :param name: the name of the object, default='root'
-    :param symbol_child_birth: the tree symbol where a sub-item is showing its first line, default=" ├─ "
-    :param symbol_child_alive: the tree symbol where a sub-item is showing its rest lines, default=" │  "
-    :param symbol_last_child_birth: the tree symbol where the last sub-item is showing its first line, default=" └─ "
-    :param symbol_last_child_alive: the tree symbol where the last sub-item is showing its rest lines, default="    "
+    :param symbol_child_birth: the tree symbol where a sub-item is showing its first line, default=' ├─ '
+    :param symbol_child_alive: the tree symbol where a sub-item is showing its rest lines, default=' │  '
+    :param symbol_last_child_birth: the tree symbol where the last sub-item is showing its first line, default=' └─ '
+    :param symbol_last_child_alive: the tree symbol where the last sub-item is showing its rest lines, default='    '
     :param expand_types: if not empty, only expand_types objects will be expanded, default={}
     :param no_expand_types: all iterable objects will be expanded except no_expand_types objects, only works when expand_types is empty, default={}
     :param expand: if False, print out the object in one line, default=True
@@ -26,10 +28,10 @@ def tree(obj, name='root', **kwargs):
     :return:
         unicode (in PY2) or str (in PY3) or None (return_instead=False)
     """
-    _kwargs = {'symbol_child_birth': " ├─ ",
-               'symbol_child_alive': " │  ",
-               'symbol_last_child_birth': " └─ ",
-               'symbol_last_child_alive': "    ",
+    _kwargs = {'symbol_child_birth': ' ├─ ',
+               'symbol_child_alive': ' │  ',
+               'symbol_last_child_birth': ' └─ ',
+               'symbol_last_child_alive': '    ',
                'expand_types': {},
                'no_expand_types': {},
                'expand': True,
@@ -38,7 +40,7 @@ def tree(obj, name='root', **kwargs):
                'padding_base': '',
                'padding_extra': '',
                'padding_increment': '',
-               'padding_end': "\n"}
+               'padding_end': '\n'}
     _kwargs.update(kwargs)
     at_top_level_of_non_expand_line = False
     if _kwargs['expand']:
@@ -62,7 +64,8 @@ def tree(obj, name='root', **kwargs):
             if isinstance(obj, dict):
                 item, item_name = obj[item], item
             else:
-                item_name = "[{}]".format(i) if isinstance(obj, list) \
+                item_name = "{{{}}}".format(i) if isinstance(obj, set) \
+                    else "[{}]".format(i) if isinstance(obj, list) \
                     else "({})".format(i) if isinstance(obj, tuple) \
                     else "<{}>".format(i)
             if i < len(obj) - 1:
