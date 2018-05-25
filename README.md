@@ -48,7 +48,7 @@ example['python versions'] = py  # set
 example['types'] = types  # tuple
 example['xrange(5)'] = xrange(5)  # iterable
 example['params'] = params  # dict
-example['auther'] = '4lan'  # string
+example['author'] = '4lan'  # string
 ```
 
 ### example 1: default
@@ -114,7 +114,7 @@ tree(example, 'example')
      │   └─ show_type
      │       ├─ (0): if True, object type info will be added at the end of expanding object name
      │       └─ (1): default=False
-     └─ auther: 4lan
+     └─ author: 4lan
     
 
 ### example 2: show type
@@ -180,7 +180,7 @@ tree(example, 'example', show_type=True)
      │   └─ show_type <type 'tuple'>
      │       ├─ (0): if True, object type info will be added at the end of expanding object name
      │       └─ (1): default=False
-     └─ auther: 4lan
+     └─ author: 4lan
     
 
 ### example 3: specify symbols
@@ -246,7 +246,7 @@ tree(example, 'example', symbol_child_birth=' +- ', symbol_child_alive=' |  ', s
      |   +- show_type
      |       +- (0): if True, object type info will be added at the end of expanding object name
      |       +- (1): default=False
-     +- auther: 4lan
+     +- author: 4lan
     
 
 ### example 4: only expand objects of particular types
@@ -273,7 +273,7 @@ tree(example, 'example', expand_types={dict})
      │   ├─ expand: (if False, print out the object in one line, default=True)
      │   ├─ return_instead: (if True, no printing, but return a string instead, default=False)
      │   └─ show_type: (if True, object type info will be added at the end of expanding object name, default=False)
-     └─ auther: 4lan
+     └─ author: 4lan
     
 
 ### example 5: expand all iterable objects except particular types
@@ -329,7 +329,7 @@ tree(example, 'example', no_expand_types={list, xrange})
      │   └─ show_type
      │       ├─ (0): if True, object type info will be added at the end of expanding object name
      │       └─ (1): default=False
-     └─ auther: 4lan
+     └─ author: 4lan
     
 
 ### example 6: print out in one line
@@ -339,7 +339,7 @@ tree(example, 'example', no_expand_types={list, xrange})
 tree(example, 'example', expand=False)
 ```
 
-    example: {languages: [English, 中文, 日本語, русский, etc.], python versions: {python3, python2}, types: (dict, {set}, [list], (tuple), <iterable>), xrange(5): <0, 1, 2, 3, 4>, params: {obj: (the object to be printed), name: (the name of the object, default='root'), symbol_child_birth: (the tree symbol where a sub-item is showing its first line, default=' ├─ '), symbol_child_alive: (the tree symbol where a sub-item is showing its rest lines, default=' │  '), symbol_last_child_birth: (the tree symbol where the last sub-item is showing its first line, default=' └─ '), symbol_last_child_alive: (the tree symbol where the last sub-item is showing its rest lines, default='    '), expand_types: (if not empty, only expand_types objects will be expanded, default={}), no_expand_types: (all iterable objects will be expanded except no_expand_types objects, only works when expand_types is empty, default={}), expand: (if False, print out the object in one line, default=True), return_instead: (if True, no printing, but return a string instead, default=False), show_type: (if True, object type info will be added at the end of expanding object name, default=False)}, auther: 4lan}
+    example: {languages: [English, 中文, 日本語, русский, etc.], python versions: {python3, python2}, types: (dict, {set}, [list], (tuple), <iterable>), xrange(5): <0, 1, 2, 3, 4>, params: {obj: (the object to be printed), name: (the name of the object, default='root'), symbol_child_birth: (the tree symbol where a sub-item is showing its first line, default=' ├─ '), symbol_child_alive: (the tree symbol where a sub-item is showing its rest lines, default=' │  '), symbol_last_child_birth: (the tree symbol where the last sub-item is showing its first line, default=' └─ '), symbol_last_child_alive: (the tree symbol where the last sub-item is showing its rest lines, default='    '), expand_types: (if not empty, only expand_types objects will be expanded, default={}), no_expand_types: (all iterable objects will be expanded except no_expand_types objects, only works when expand_types is empty, default={}), expand: (if False, print out the object in one line, default=True), return_instead: (if True, no printing, but return a string instead, default=False), show_type: (if True, object type info will be added at the end of expanding object name, default=False)}, author: 4lan}
 
 ### example 7: return instead
 
@@ -404,6 +404,6 @@ print(tree(example, 'example', return_instead=True))
      │   └─ show_type
      │       ├─ (0): if True, object type info will be added at the end of expanding object name
      │       └─ (1): default=False
-     └─ auther: 4lan
+     └─ author: 4lan
     
     
